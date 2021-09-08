@@ -51,9 +51,9 @@ class Icosphere extends Drawable {
     }
 
     // Create 3-float buffer views into the backing buffer to represent positions
-    let vertices: Array<vec4> = new Array(12);
+    let vertices: Array<Float32Array> = new Array(12);
     for (let i = 0; i < 12; ++i) {
-      vertices[i] = <vec4> new Float32Array(buffer0, vertexByteOffset + i * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
+      vertices[i] =new Float32Array(buffer0, vertexByteOffset + i * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
     }
 
     // Initialize normals for a 20-sided icosahedron
@@ -105,7 +105,7 @@ class Icosphere extends Drawable {
       function mid(v0: number, v1: number): number {
         let key = [v0, v1].sort().join('_');
         if (!edgeMap.has(key)) {
-          let midpoint = <vec4> new Float32Array(buffer0, vertexByteOffset + vertices.length * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
+          let midpoint = new Float32Array(buffer0, vertexByteOffset + vertices.length * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
           vec4.add(midpoint, vertices[v0], vertices[v1]);
           vec4.normalize(midpoint, midpoint);
           edgeMap.set(key, vertices.length);
