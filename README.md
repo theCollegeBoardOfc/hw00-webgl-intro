@@ -1,5 +1,8 @@
 # CIS 566 Homework 0: Noisy Planet Part 1 (Intro to Javascript and WebGL)
 
+![image](https://user-images.githubusercontent.com/1758825/132532354-e3a45402-e484-499e-bfa7-2d73b9f2c946.png)
+(source: Ken Perlin)
+
 ## Objective
 - Check that the tools and build configuration we will be using for the class works.
 - Start learning Typescript and WebGL2
