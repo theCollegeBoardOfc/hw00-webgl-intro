@@ -43,23 +43,20 @@ We would suggest editing your project with Visual Studio Code https://code.visua
 7. Feel free to update any of the files when writing your code. The implementation of the `OpenGLRenderer` is currently very simple.
 
 ## Making a Live Demo
+When you push changes to the `master` branch of your repository on Github, a Github workflow will run automatically which builds your code and pushes the build to a new branch `gh-pages`. The configuration file which handles this is located at `.github/workflows/build-and-deploy.yml`. If you want to modify this, you can read more about workflows [here](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions).
+
+Once your built code is pushed to `gh-pages`, Github can automatically publish a live site. Configure that by:
+
   1. Open the Settings tab of your repository in Github.
 
-  2. Scroll down to the Pages tab of the Settings (in the table on the left) and choose which branch to make the source for the deployed project. Usually this is just your `master` branch.
+  2. Scroll down to the Pages tab of the Settings (in the table on the left) and choose which branch to make the source for the deployed project. This should be the `gh-pages` branch which is automatically created after the first successful build of the `master` branch.
 
-  3. Execute the command 'npm run build' in the command line on your local machine.
-
-  4. Make sure to 'git add -f node_modules' otherwise your project will be missing vital files. By default they are ignored by our `.gitignore` since it's wasteful to push them unless it's your final build.
-
-  5. Commit and push your changes.
-
-  This publishes your project. It should now be visible at http://username.github.io/repo-name
-
+  3. Done! Now, any new commits on the `master` branch will be built and pushed to `gh-pages`. The project should be visible at http://username.github.io/repo-name.
  
 
 To check if everything is on the right track:
 
-1. Make sure the master branch of your forked repo has a folder called `dist` with `bundle.js` and `bundle.js.map`
+1. Make sure the `gh-pages` branch of your repo has a files called `dist` with `bundle.js` and `bundle.js.map`
 
 2. In the settings tab of the repo, under Pages, make sure it says your site is published at some url.
 
@@ -67,6 +64,7 @@ To check if everything is on the right track:
 1. Create a pull request to this repository with your completed code.
 2. Update README.md to contain a solid description of your project with a screenshot of some visuals, and a link to your live demo.
 3. Submit the link to your pull request on Canvas, and add a comment to your submission with a hyperlink to your live demo.
+4. Include a link to your live site.
 
 ## Resources
 - Javascript modules https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
