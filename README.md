@@ -38,6 +38,11 @@ We would suggest editing your project with Visual Studio Code https://code.visua
 5. Write a custom shader that implements a 3d noise function. Your custom shader must use a trig function to modify vertex position or fragment color non-uniformly. If your custom shader is particularly interesting, you'll earn some bonus points.
 6. Feel free to update any of the files when writing your code. The implementation of the `OpenGLRenderer` is currently very simple.
 
+## Submission
+1. Create a pull request to this repository with your completed code.
+2. Update README.md to contain a solid description of your project with a screenshot of some visuals
+3. Submit the link to your pull request on Canvas.
+
 ## Resources
 - Javascript modules https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
 - Typescript https://www.typescriptlang.org/docs/home.html
