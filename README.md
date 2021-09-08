@@ -1,8 +1,9 @@
-# CIS 566 Homework 0: Intro to Javascript and WebGL
+# CIS 566 Homework 0: Noisy Planet Part 1 (Intro to Javascript and WebGL)
 
 ## Objective
 - Check that the tools and build configuration we will be using for the class works.
 - Start learning Typescript and WebGL2
+- Practice implementing noise
 
 ## Running the Code
 
@@ -29,7 +30,7 @@ We would suggest editing your project with Visual Studio Code https://code.visua
 2. Take a look at the resources linked in the section below. Definitely read about Javascript modules and Typescript. The other links provide documentation for classes used in the code.
 3. Add a `Cube` class that inherits from `Drawable` and at the very least implement a constructor and its `create` function. Then, add a `Cube` instance to the scene to be rendered.
 4. Read the documentation for dat.GUI below. Update the existing GUI in `main.ts` with a parameter to alter the color passed to `u_Color` in the Lambert shader.
-5. Write a custom shader of your choosing and add a GUI element that allows the user to switch shaders. Your custom shader must use a trig function to modify vertex position or fragment color non-uniformly. If your custom shader is particularly interesting, you'll earn some bonus points.
+5. Write a custom shader that implements a 3d noise function. Your custom shader must use a trig function to modify vertex position or fragment color non-uniformly. If your custom shader is particularly interesting, you'll earn some bonus points.
 6. Feel free to update any of the files when writing your code. The implementation of the `OpenGLRenderer` is currently very simple.
 
 ## Resources
