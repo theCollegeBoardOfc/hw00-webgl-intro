@@ -10,6 +10,9 @@
 - Start learning Typescript and WebGL2
 - Practice implementing noise
 
+## Forking the Code
+Rather than cloning the homework repository, please __fork__ the code into your own repository using the `Fork` button in the upper-right hand corner of the Github UI. This will enable you to have your own personal repository copy of the code, and let you make a live demo (described later in this document).
+
 ## Running the Code
 
 1. [Install Node.js](https://nodejs.org/en/download/). Node.js is a JavaScript runtime. It basically allows you to run JavaScript when not in a browser. For our purposes, this is not necessary. The important part is that with it comes `npm`, the Node Package Manager. This allows us to easily declare and install external dependencies such as [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage), and [glMatrix](http://glmatrix.net/).
@@ -35,13 +38,35 @@ We would suggest editing your project with Visual Studio Code https://code.visua
 2. Take a look at the resources linked in the section below. Definitely read about Javascript modules and Typescript. The other links provide documentation for classes used in the code.
 3. Add a `Cube` class that inherits from `Drawable` and at the very least implement a constructor and its `create` function. Then, add a `Cube` instance to the scene to be rendered.
 4. Read the documentation for dat.GUI below. Update the existing GUI in `main.ts` with a parameter to alter the color passed to `u_Color` in the Lambert shader.
-5. Write a custom shader that implements a 3d noise function. Your custom shader must use a trig function to modify vertex position or fragment color non-uniformly. If your custom shader is particularly interesting, you'll earn some bonus points.
-6. Feel free to update any of the files when writing your code. The implementation of the `OpenGLRenderer` is currently very simple.
+5. Write a custom fragment shader that implements FBM, Worley Noise, or Perlin Noise based on 3D inputs (as opposed to the 2D inputs in the slides). This noise must be used to modify your fragment color. If your custom shader is particularly interesting, you'll earn some bonus points.
+6. Write a custom vertex shader that uses a trigonometric function (e.g. `sin`, `tan`) to non-uniformly modify your cube's vertex positions over time. This will necessitate instantiating an incrementing variable in your Typescript code that you pass to your shader every tick. Refer to the base code's methods of passing variables to shaders if you are unsure how to do so.
+7. Feel free to update any of the files when writing your code. The implementation of the `OpenGLRenderer` is currently very simple.
+
+## Making a Live Demo
+  1. Open the Settings tab of your repository in Github.
+
+  2. Scroll down to the Pages tab of the Settings (in the table on the left) and choose which branch to make the source for the deployed project. Usually this is just your `master` branch.
+
+  3. Execute the command 'npm run build' in the command line on your local machine.
+
+  4. Make sure to 'git add -f node_modules' otherwise your project will be missing vital files. By default they are ignored by our `.gitignore` since it's wasteful to push them unless it's your final build.
+
+  5. Commit and push your changes.
+
+  This publishes your project. It should now be visible at http://username.github.io/repo-name
+
+ 
+
+To check if everything is on the right track:
+
+1. Make sure the master branch of your forked repo has a folder called `dist` with `bundle.js` and `bundle.js.map`
+
+2. In the settings tab of the repo, under Pages, make sure it says your site is published at some url.
 
 ## Submission
 1. Create a pull request to this repository with your completed code.
-2. Update README.md to contain a solid description of your project with a screenshot of some visuals
-3. Submit the link to your pull request on Canvas.
+2. Update README.md to contain a solid description of your project with a screenshot of some visuals, and a link to your live demo.
+3. Submit the link to your pull request on Canvas, and add a comment to your submission with a hyperlink to your live demo.
 
 ## Resources
 - Javascript modules https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
