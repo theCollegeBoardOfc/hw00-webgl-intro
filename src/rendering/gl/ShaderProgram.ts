@@ -90,7 +90,7 @@ class ShaderProgram {
   setTick(tickRate: number) {
     this.use();
     if (this.unifTick !== -1) {
-      //console.log(tickRate);
+      console.log(tickRate);
       //console.log(this.unifTick);
       gl.uniform1f(this.unifTick, tickRate);
     }
