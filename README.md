@@ -8,6 +8,8 @@
 ## Description
 Added Color selecter. Color is also modified by a very jank fbm noise in fragment shader. Vertex shader adjusts position of vertices based on trig functions.
 
+Link: https://thecollegeboardofc.github.io/hw00-webgl-intro/
+
 ![Test Image 1](Ss1.png)
 ![Test Image 1](Ss2.png)
 
