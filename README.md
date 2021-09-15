@@ -5,6 +5,9 @@
 </p>
 <p align="center">(source: Ken Perlin)</p>
 
+![Test Image 1](Ss1.png)
+![Test Image 1](Ss2.png)
+
 ## Objective
 - Check that the tools and build configuration we will be using for the class works.
 - Start learning Typescript and WebGL2
