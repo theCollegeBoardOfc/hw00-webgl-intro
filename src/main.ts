@@ -3,6 +3,7 @@ const Stats = require('stats-js');
 import * as DAT from 'dat.gui';
 import Icosphere from './geometry/Icosphere';
 import Square from './geometry/Square';
+import Cube from './geometry/Cube';
 import OpenGLRenderer from './rendering/gl/OpenGLRenderer';
 import Camera from './Camera';
 import {setGL} from './globals';
@@ -14,16 +15,26 @@ const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
 };
+var palette = {
+  color: [ 0, 128, 255 ], // RGB array
+};
 
 let icosphere: Icosphere;
 let square: Square;
 let prevTesselations: number = 5;
-
+let cube: Cube;
+let date: Date;
+let time = 0.0;
 function loadScene() {
+  date = new Date(); 
+  time = date.getTime(); 
   icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, controls.tesselations);
   icosphere.create();
   square = new Square(vec3.fromValues(0, 0, 0));
   square.create();
+  cube = new Cube(vec3.fromValues(0,0,0), 1);
+  cube.create()
+
 }
 
 function main() {
@@ -38,7 +49,9 @@ function main() {
   // Add controls to the gui
   const gui = new DAT.GUI();
   gui.add(controls, 'tesselations', 0, 8).step(1);
+
   gui.add(controls, 'Load Scene');
+  gui.addColor(palette, 'color');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -76,10 +89,18 @@ function main() {
       icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, prevTesselations);
       icosphere.create();
     }
+    let newDate: Date = new Date();
+    let tickRate = newDate.getTime() - time;
+
+    let colorVec  = vec3.fromValues(palette.color[0] / 255.0, palette.color[1] / 255.0, palette.color[2] / 255.0); 
     renderer.render(camera, lambert, [
-      icosphere,
-      // square,
-    ]);
+      //icosphere,
+      //square,
+      cube, 
+      ],
+      colorVec,
+      tickRate / 100.0
+    );
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame
