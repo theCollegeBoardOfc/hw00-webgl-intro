@@ -14,6 +14,7 @@ Used Fbm noise to generate terrain with detailing done by Perlin. Created a temp
 
 ## Used Resourcess
 https://blog.demofox.org/2012/09/24/bias-and-gain-are-your-friend/
+
 http://dev.thi.ng/gradients/
 
 Link: https://thecollegeboardofc.github.io/hw00-webgl-intro/
