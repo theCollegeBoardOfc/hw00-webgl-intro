@@ -7,6 +7,7 @@
 //This simultaneous transformation allows your program to run much faster, especially when rendering
 //geometry with millions of vertices.
 
+uniform float u_Tick;
 uniform mat4 u_Model;       // The matrix that defines the transformation of the
                             // object we're rendering. In this assignment,
                             // this will be the result of traversing your scene graph.
@@ -28,68 +29,36 @@ in vec4 vs_Col;             // The array of vertex colors passed to the shader.
 out vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.
 out vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.
 out vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.
+out vec4 fs_Pos;
 
-const vec4 lightPos = vec4(5, 5, 3, 1); //The position of our virtual light, which is used to compute the shading of
+const vec4 lightPos = vec4(10, 10, 3, 1); //The position of our virtual light, which is used to compute the shading of
                                         //the geometry in the fragment shader.
 
-#define NUM_OCTAVES 5
-
-vec3 random3d(vec3 p){
- 	const vec3 k = vec3(23891.35289, 5739.123, 6969.420);
- 	p = p*k + k.zyx;
- 	return fract(1284.421631 * k * fract(p.x*p.y*(p.x+p.y)*p.z+p.z));
-}
-
-float noise(vec3 p){
-    vec3 a = floor(p);
-    vec3 d = p - a;
-    d = d * d * (3.0 - 2.0 * d);
-
-    vec4 b = a.xxyy + vec4(0.0, 1.0, 0.0, 1.0);
-    vec4 k1 = perm(b.xyxy);
-    vec4 k2 = perm(k1.xyxy + b.zzww);
-
-    vec4 c = k2 + a.zzzz;
-    vec4 k3 = perm(c);
-    vec4 k4 = perm(c + 1.0);
-
-    vec4 o1 = fract(k3 * (1.0 / 41.0));
-    vec4 o2 = fract(k4 * (1.0 / 41.0));
-
-    vec4 o3 = o2 * d.z + o1 * (1.0 - d.z);
-    vec2 o4 = o3.yw * d.x + o3.xz * (1.0 - d.x);
-
-    return o4.y * d.y + o4.x * (1.0 - d.y);
-}
-
-
-float fbm(vec3 x) {
-	float v = 0.0;
-	float a = 0.5;
-	vec3 shift = vec3(100);
-	for (int i = 0; i < NUM_OCTAVES; ++i) {
-		v += a * noise(x);
-		x = x * 2.0 + shift;
-		a *= 0.5;
-	}
-	return v;
-}
 
 void main()
 {
     fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation
 
     mat3 invTranspose = mat3(u_ModelInvTr);
-    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.
+             // Pass the vertex normals to the fragment shader for interpolation.
                                                             // Transform the geometry's normals by the inverse transpose of the
                                                             // model matrix. This is necessary to ensure the normals remain
                                                             // perpendicular to the surface after the surface is transformed by
                                                             // the model matrix.
 
 
-    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below
+    mat4 rot;
+    rot[0] = vec4(cos(u_Tick / 10.), 0., -sin(u_Tick / 10.), 0.);
+    rot[1] = vec4(0., 1., 0., 0.);
+    rot[2] = vec4(sin(u_Tick / 10.), 0., cos(u_Tick / 10.), 0.);
+    rot[3] = vec4(0., 0., 0., 1.);
+    vec4 modelposition = u_Model * rot *  (vs_Pos + normalize(vs_Nor) * .9);   // Temporarily store the transformed vertex positions for use below
+
+    fs_Nor = vec4(invTranspose * vec3(rot * vs_Nor), 0); 
 
     fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies
+
+    fs_Pos = vs_Pos + normalize(vs_Nor) * 1.;
 
     gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is
                                              // used to render the final positions of the geometry's vertices
