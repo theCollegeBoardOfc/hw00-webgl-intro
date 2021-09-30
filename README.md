@@ -12,6 +12,7 @@ Link: https://thecollegeboardofc.github.io/hw00-webgl-intro/
 
 ![Test Image 1](Ss1.png)
 ![Test Image 1](Ss2.png)
+![Test Image 1](planet.png)
 
 ## Objective
 - Check that the tools and build configuration we will be using for the class works.
