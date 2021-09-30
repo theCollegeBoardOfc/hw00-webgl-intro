@@ -435,9 +435,10 @@ vec4 setBiome(vec4 pos, float heightWeight, float tempWeight, float moistWeight)
   }
   
   if (height < .505) {
-    retCol = vec4(0., .5, .7, 1.);
+    retCol = retCol + ((getGain(clamp(fbm(pos.xyz, 5, .5, 5.), 0., 1.), .1)) / 3.);
   }
 
+  
   retCol.w = check;
   return retCol;
 }
